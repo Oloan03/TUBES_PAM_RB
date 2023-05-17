@@ -23,8 +23,6 @@ const Sidebar = () => {
           style={styles.title}
         />
       <View style={styles.header}>
- 
-      
         <Image
           source={require('assets/User-100.png')}
           style={styles.logo}
