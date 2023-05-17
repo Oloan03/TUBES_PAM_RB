@@ -49,9 +49,7 @@ const Sidebar = () => {
       </View>
       {isSettingOpen && (
         <View style={styles.settingContainer}>
-          <Text>Setting 1</Text>
-          <Text>Setting 2</Text>
-          <Text>Setting 3</Text>
+         
         </View>
       )}
     </View>
