@@ -77,6 +77,8 @@ const styles = StyleSheet.create({
     setIsBookmarked(!isBookmarked);
   },
   title: {
+    const handleBookmark = () => {
+    setIsBookmarked(!isBookmarked);
     fontWeight: 'bold',
     fontSize: 16,
   },
