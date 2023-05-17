@@ -48,7 +48,7 @@ const Sidebar = () => {
         </TouchableOpacity>
       </View>
       {isSettingOpen && (
-        <View style={styles.settingContainer}>
+       
          
         </View>
       )}
