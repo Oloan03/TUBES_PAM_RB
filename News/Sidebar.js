@@ -101,5 +101,6 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
 });
-
+const handleBookmark = () => {
+    setIsBookmarked(!isBookmarked);
 export default Sidebar;
