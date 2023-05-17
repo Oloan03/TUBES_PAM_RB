@@ -47,9 +47,6 @@ const Sidebar = () => {
           <Text style={styles.itemText}>Account</Text>
         </TouchableOpacity>
       </View>
-   
-       
-         
         </View>
       )}
     </View>
