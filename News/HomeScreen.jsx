@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   SafeAreaView,
   ScrollView,
@@ -12,24 +13,27 @@ import {
   Dimensions,
 } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import Sidebar from './Sidebar';
+import SettingsScreen from './SettingsScreen';
+import { createStackNavigator } from '@react-navigation/stack';
+import { setData, setLoading, setSidebarOpen, setSearchQuery, setRefreshing } from './store';
+
+const Stack = createStackNavigator();
 
 const HomeScreen = ({ navigation }) => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [refreshing, setRefreshing] = useState(false);
+  const dispatch = useDispatch();
+  const { data, loading, sidebarOpen, searchQuery, refreshing } = useSelector((state) => state);
 
   const screenWidth = Dimensions.get('window').width;
 
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `https://newsapi.org/v2/top-headlines?country=us&apiKey=a914f6db85534d6694561c436ea763cf`
+        `https://newsapi.org/v2/top-headlines?country=id&apiKey=a914f6db85534d6694561c436ea763cf`
       );
       const json = await response.json();
-      setData(json.articles);
-      setLoading(false);
+      dispatch(setData(json.articles));
+      dispatch(setLoading(false));
     } catch (error) {
       console.error(error);
     }
@@ -40,27 +44,35 @@ const HomeScreen = ({ navigation }) => {
   }, []);
 
   const onRefresh = async () => {
-    setRefreshing(true);
+    dispatch(setRefreshing(true));
     await fetchData();
-    setRefreshing(false);
+    dispatch(setRefreshing(false));
   };
 
   const handleSearch = () => {
-    const filteredData = data.filter(item =>
+    const filteredData = data.filter((item) =>
       item.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    setData(filteredData);    
+    dispatch(setData(filteredData));
+  };
+
+  const toggleSidebar = () => {
+    dispatch(setSidebarOpen(!sidebarOpen));
+  };
+
+  const goToSettings = () => {
+    navigation.navigate('Settings');
   };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" />
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => setSidebarOpen(true)}>
+        <TouchableOpacity onPress={toggleSidebar}>
           <Ionicons name="menu" size={24} color="black" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>PAM NEWS</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={goToSettings}>
           <MaterialIcons name="settings" size={24} color="black" />
         </TouchableOpacity>
       </View>
@@ -75,9 +87,10 @@ const HomeScreen = ({ navigation }) => {
             style={styles.searchInput}
             placeholder="Search news"
             value={searchQuery}
-            onChangeText={(text) => setSearchQuery(text)}
+            onChangeText={(text) => dispatch(setSearchQuery(text))}
             onSubmitEditing={handleSearch}
           />
+          <Ionicons name="search" size={24} color="black" />
         </View>
         {loading ? (
           <Text>Loading...</Text>
@@ -97,6 +110,11 @@ const HomeScreen = ({ navigation }) => {
           ))
         )}
       </ScrollView>
+      {sidebarOpen && (
+        <View style={styles.sidebarContainer}>
+          <Sidebar onClose={toggleSidebar} />
+        </View>
+      )}
       <TouchableOpacity style={styles.refreshButton} onPress={onRefresh}>
         <Ionicons name="refresh" size={24} color="white" />
       </TouchableOpacity>
@@ -145,7 +163,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
-
     elevation: 3,
   },
   newsTitle: {
@@ -157,15 +174,24 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   refreshButton: {
-    backgroundColor: 'blue',
     position: 'absolute',
     bottom: 20,
-    right: 20,
+    alignSelf: 'center',
+    backgroundColor: 'blue',
+    borderRadius: 50,
     width: 50,
     height: 50,
-    borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  sidebarContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 1,
   },
 });
 

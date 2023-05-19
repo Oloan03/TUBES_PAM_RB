@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "131958178688",
+    "project_id": "pam-news-21e03",
+    "storage_bucket": "pam-news-21e03.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:131958178688:android:2e1d2ad4315effae923765",
+        "android_client_info": {
+          "package_name": "com.reactnativefirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "131958178688-eifomi5svchmmmnmjp1b1mat3e0dqi7s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwnVdTgqfy9t-z0xGyjorqMIxTVgwnJfY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "131958178688-8il4iad7efhv6r97s284p80otgmeadsr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
