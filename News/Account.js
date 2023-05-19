@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TextInput, Button } from 'react-native';
 
 const AccountScreen = () => {
-  const [username, setUsername] = useState('JohnDoe');
-  const [name, setName] = useState('John Doe');
-  const [email, setEmail] = useState('johndoe@example.com');
-  const [phone, setPhone] = useState('1234567890');
-  const [birthdate, setBirthdate] = useState('01/01/1990');
+  const [username, setUsername] = useState('PamNews');
+  const [name, setName] = useState('PAM News');
+  const [email, setEmail] = useState('PamNews@pam.com');
+  const [phone, setPhone] = useState('0123456789');
+  const [birthdate, setBirthdate] = useState('15/05/2023');
   const [isEditing, setIsEditing] = useState(false);
 
   const handleEdit = () => {
@@ -50,51 +50,57 @@ const AccountScreen = () => {
        </View>
       </View>
 
-      <Text style={styles.label}>Name</Text>
-      {isEditing ? (
-        <TextInput
-          style={styles.input}
-          value={name}
-          onChangeText={(text) => setName(text)}
-        />
-      ) : (
-        <Text style={styles.text}>{name}</Text>
-      )}
+      <View style={styles.border}>
+        <Text style={styles.label}>Name</Text>
+        {isEditing ? (
+          <TextInput
+            style={styles.input}
+            value={name}
+            onChangeText={(text) => setName(text)}
+          />
+        ) : (
+          <Text style={styles.text}>{name}</Text>
+        )}
+      </View>
 
-      <Text style={styles.label}>Email</Text>
-      {isEditing ? (
-        <TextInput
-          style={styles.input}
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-        />
-      ) : (
-        <Text style={styles.text}>{email}</Text>
-      )}
+      <View style={styles.border}>
+        <Text style={styles.label}>Email</Text>
+        {isEditing ? (
+          <TextInput
+            style={styles.input}
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+          />
+        ) : (
+          <Text style={styles.text}>{email}</Text>
+        )}
+      </View>
 
-      <Text style={styles.label}>Phone</Text>
-      {isEditing ? (
-        <TextInput
-          style={styles.input}
-          value={phone}
-          onChangeText={(text) => setPhone(text)}
-        />
-      ) : (
-        <Text style={styles.text}>{phone}</Text>
-      )}
+      <View style={styles.border}>
+        <Text style={styles.label}>Phone</Text>
+        {isEditing ? (
+          <TextInput
+            style={styles.input}
+            value={phone}
+            onChangeText={(text) => setPhone(text)}
+          />
+        ) : (
+          <Text style={styles.text}>{phone}</Text>
+        )}
+      </View>
 
-      <Text style={styles.label}>Birthdate</Text>
-      {isEditing ? (
-        <TextInput
-          style={styles.input}
-          value={birthdate}
-          onChangeText={(text) => setBirthdate(text)}
-        />
-      ) : (
-        <Text style={styles.text}>{birthdate}</Text>
-      )}
-
-      
+      <View style={styles.border}>
+        <Text style={styles.label}>Birthdate</Text>
+        {isEditing ? (
+          <TextInput
+            style={styles.input}
+            value={birthdate}
+            onChangeText={(text) => setBirthdate(text)}
+          />
+        ) : (
+          <Text style={styles.text}>{birthdate}</Text>
+        )}
+      </View>
     </View>
   );
 };
@@ -105,25 +111,26 @@ const styles = StyleSheet.create({
     alignItems: 'left',
     justifyContent: 'center',
     backgroundColor: '#E8E3E3',
-
+  },
+  border: {
+    marginTop: 10,
+    borderRadius: 5,
+    backgroundColor: '#ffffff',
   },
   bordername: {
-    alignItems: 'left',
+    alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'center',
     borderWidth: 1,
     borderRadius: 20,
     backgroundColor: '#F8D6D6',
   },
 
   edit: {
-    marginRight: 10,
-    marginTop: 20,
+    marginRight: 15, 
   },
 
   containeruser: {
-    marginTop: 10,
-    marginLeft: 10,
+    marginLeft: 20,
     alignItems: 'left',
     flex: 1,
   },
@@ -134,16 +141,24 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginLeft: 10,
     marginTop: 5,
-
-
+  },
+  text: {
+    fontSize: 13,
+    marginLeft: 10,
+    marginBottom: 5,
   },
   label: {
     fontSize: 13,
     fontWeight: 'bold',
+    marginTop: 10,
     marginBottom: 5,
+    marginLeft: 10,
   },
   input: {
+    marginLeft: 10,
+    marginBottom: 5,
     width: '80%',
+    fontSize: 13,
     height: 19,
     borderWidth: 0.5,
   },
